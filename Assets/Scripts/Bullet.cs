@@ -6,6 +6,9 @@ public class Bullet : MonoBehaviour
     public float speed = 20;
     public GameObject particle;
     public int particleCount;
+    public GameObject explosionMark;
+
+    public AudioSource explosionSound;
 
     private void Start()
     {
@@ -25,6 +28,9 @@ public class Bullet : MonoBehaviour
             {
                 var offset = Random.insideUnitSphere;
                 Instantiate(particle, transform.position + offset, transform.rotation);
+                explosionSound.Play();
+                explosionMark.SetActive(true);
+                Instantiate(explosionMark, transform.position, transform.rotation);
             }
         }
         

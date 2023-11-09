@@ -13,6 +13,8 @@ public class Tank : MonoBehaviour
 
     public GameObject bullet;
     public Transform shootPoint;
+
+    public AudioSource firingSound;
     private void Update()
     {
         var ver = Input.GetAxis(verticalAxis);
@@ -24,8 +26,8 @@ public class Tank : MonoBehaviour
 
         if (Input.GetKeyDown(shootKey))
         {
-            print("shoot !");
             Instantiate(bullet, shootPoint.position, shootPoint.rotation);
+            firingSound.Play();
         }
     }
 }
