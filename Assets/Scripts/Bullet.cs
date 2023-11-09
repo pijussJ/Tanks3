@@ -4,8 +4,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 20;
-    public GameObject toDestruct;
-    public GameObject cube;
+    public GameObject particle;
+    public int particleCount;
+
     private void Start()
     {
         Destroy(gameObject, 2f);
@@ -16,14 +17,16 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Building")
+        Destroy(gameObject);
+        if (collision.gameObject.tag == "Boom")
         {
-            for (int i = 0; i < 5; i++)
+            Destroy(collision.gameObject);
+            for (int i = 0; i < particleCount; i++)
             {
-                Instantiate(cube, transform.position, transform.rotation);
+                var offset = Random.insideUnitSphere;
+                Instantiate(particle, transform.position + offset, transform.rotation);
             }
-            Destroy(toDestruct);
         }
+        
     }
-
 }
